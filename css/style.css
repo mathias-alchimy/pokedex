@@ -1,0 +1,198 @@
+body {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+}
+
+#navbar {
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  box-shadow: #c9cdce 0 3px 6px 0;
+  z-index: 10000;
+}
+#navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 25px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#navbar ul li {
+  position: relative;
+}
+#navbar ul li h1 {
+  margin-block: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#liste-pokemons {
+  padding-top: 120px;
+}
+#liste-pokemons #pokemons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  justify-items: center;
+}
+#liste-pokemons #pokemons #pokedex-card {
+  margin: 10px;
+}
+#liste-pokemons #pokemons #pokedex-card #img {
+  background-color: #EDF0F1;
+  height: 175px;
+  width: 160px;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+#liste-pokemons #pokemons #pokedex-card #img img {
+  width: 70%;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  margin-left: -55px;
+}
+#liste-pokemons #pokemons #pokedex-card #info {
+  background-color: #B9322A;
+  width: 160px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 5px 0 5px 0;
+}
+#liste-pokemons #pokemons #pokedex-card #info .bold {
+  font-weight: bold;
+}
+#liste-pokemons #pokemons #pokedex-card #info p {
+  font-size: 12px;
+  color: #fff;
+  margin: 0;
+  padding-left: 10px;
+}
+
+#container h2 {
+  font-weight: bold;
+  padding-left: 25px;
+}
+#container h2::before {
+  content: url(../medias/pokeball.png);
+  margin: 4px;
+  text-align: center;
+}
+#container #liste-pokemons {
+  display: none;
+}
+#container #liste-pokemons.visible {
+  display: grid;
+}
+#container #details-pokemons {
+  display: none;
+}
+#container #details-pokemons.visible {
+  display: block;
+}
+
+#details-pokemons #top {
+  height: 250px;
+  padding-top: 100px;
+  margin-bottom: 190px;
+  background-color: #B9322A;
+  position: relative;
+}
+#details-pokemons #top h3 {
+  color: #fff;
+  font-weight: bold;
+  margin-left: 40px;
+}
+#details-pokemons #top img {
+  position: absolute;
+  top: 200px;
+  left: 15%;
+}
+#details-pokemons #desc {
+  text-align: left;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+#details-pokemons #caracteristiques, #details-pokemons #statistiques {
+  background-color: #B9322A;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius: 10px;
+}
+#details-pokemons #caracteristiques table, #details-pokemons #statistiques table {
+  margin: 0 auto;
+  padding: 10px;
+}
+#details-pokemons #caracteristiques table thead, #details-pokemons #statistiques table thead {
+  color: #fff;
+}
+#details-pokemons #caracteristiques table th, #details-pokemons #caracteristiques table td, #details-pokemons #statistiques table th, #details-pokemons #statistiques table td {
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#details-pokemons #types, #details-pokemons #faiblesses {
+  margin-left: 40px;
+}
+#details-pokemons #types span, #details-pokemons #faiblesses span {
+  font-size: 15px;
+  text-align: center;
+  display: inline-block;
+  width: 55px;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 2px 5px 2px 5px;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+#details-pokemons #types .Plante, #details-pokemons #faiblesses .Plante {
+  background-color: #68B54F;
+}
+#details-pokemons #types .Poison, #details-pokemons #faiblesses .Poison {
+  background-color: #843E8A;
+}
+#details-pokemons #types .Feu, #details-pokemons #faiblesses .Feu {
+  background-color: #ED6920;
+}
+#details-pokemons #types .Psy, #details-pokemons #faiblesses .Psy {
+  background-color: #E03E72;
+}
+#details-pokemons #types .Vol, #details-pokemons #faiblesses .Vol {
+  background-color: #837BB8;
+}
+#details-pokemons #types .Glace, #details-pokemons #faiblesses .Glace {
+  background-color: #86C9CA;
+}
+#details-pokemons #types .Eau, #details-pokemons #faiblesses .Eau {
+  background-color: #4E77BA;
+}
+#details-pokemons #types .Sol, #details-pokemons #faiblesses .Sol {
+  background-color: #E0B051;
+}
+#details-pokemons #types .Roche, #details-pokemons #faiblesses .Roche {
+  background-color: #AC8B26;
+}
+#details-pokemons #types .Electr, #details-pokemons #faiblesses .Electr {
+  background-color: #FDC516;
+}
+#details-pokemons #evolutions {
+  background-color: #EDF0F1;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  padding: 25px;
+  border-radius: 10px;
+}
+#details-pokemons #evolutions img {
+  margin: 50px auto;
+  display: block;
+  width: 50%;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}/*# sourceMappingURL=style.css.map */

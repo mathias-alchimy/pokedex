@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKEDEX</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+
+
+    <div id="app-pokemon">
+
+        <nav id="navbar">
+            <ul>
+                <li><img src="medias/logo.png" alt="logo application pokedex" v-on:click="afficheListe()"></li>
+                <li>
+                    <h1 v-on:click="afficheListe()">POKEDEX</h1>
+                </li>
+                <li><img src="medias/search.png" alt="pictogramme recherche" v-on:click="displaySearchModale()"></li>
+            </ul>
+        </nav>
+        <div class="searchModale hidden">
+            <input type="text" placeholder="rechercher" v-model="filtre" value="">
+            
+        </div>
+        <div id="container">
+
+            <div id="liste-pokemons" :class="{visible: mode == 'catalogue'}">
+
+                <h2>A découvrir ></h2>
+
+                <div id="pokemons">
+                    <div v-for="(pokemon, index) in infos" id="pokedex-card" v-on:click="afficheDetails(pokemon.url)">
+                        <div id="img">
+                            <img v-bind:src="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+getUrlId(pokemon.url)+'.png'" />
+                        </div>
+
+                        <div id="info">
+                            <p class="bold">{{ pokemon.name }}</p>
+                            <p>N°{{ getUrlId(pokemon.url) }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="details-pokemons" :class="{visible: mode == 'details'}" v-if="mode == 'details'">
+                <div id="top">
+                    <h3 class="bold"> N°{{ info.id }} - {{ info.name}}</h3>
+
+                    <!-- <img v-bind:src="info.sprites.front_default"  width="70%" /> -->
+                    <img v-bind:src="getImage(info.id)" alt="">
+                </div>
+                <div id="caracteristiques">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Taille</th>
+                                <th>Poids</th> 
+                                <th>Expérience</th>                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ info.height }} dm</td>
+                                <td>{{ info.weight }} hgr</td> 
+                                <td>{{ info.base_experience }}</td>                                
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+
+                </div>
+                <div id="images">
+                    <img v-bind:src="info.sprites.back_default" alt="" v-if="info.sprites.back_default">
+                    <img v-bind:src="info.sprites.back_female" alt="" v-if="info.sprites.back_female">
+                    <img v-bind:src="info.sprites.back_shiny" alt="" v-if="info.sprites.back_shiny">
+                    <img v-bind:src="info.sprites.back_shiny_female" alt="" v-if="info.sprites.back_shiny_female">
+                    <img v-bind:src="info.sprites.front_default" alt="" v-if="info.sprites.front_default">
+                    <img v-bind:src="info.sprites.front_female" alt="" v-if="info.sprites.front_female">
+                    <img v-bind:src="info.sprites.front_shiny" alt="" v-if="info.sprites.front_shiny">
+                    <img v-bind:src="info.sprites.front_shiny_female" alt="" v-if="info.sprites.front_shiny_female">
+                </div>
+                <nav id="prevnext">
+                    <a href="#" class="btn" v-on:click="afficheDetails('https://pokeapi.co/api/v2/pokemon/'+(parseInt(info.id)-1)+'/')" v-if="info.id > 1">Précédent</a>
+                    <a href="#" class="btn" v-on:click="afficheDetails('https://pokeapi.co/api/v2/pokemon/'+(parseInt(info.id)+1)+'/')">Suivant</a>
+                </nav>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app-pokemon',
+            data() {
+                return {
+                    infos: null,
+                    bu_infos:null,
+                    info: {},
+                    mode: 'catalogue',
+                    filtre:null,
+                    
+                }
+
+            },
+            
+            watch: {
+                filtre(newFiltre, oldFiltre){
+                    this.infos = this.bu_infos;
+                    this.infos = this.infos.filter(function(item){
+                        //console.log(item.name.includes(newFiltre))
+                        return item.name.includes(newFiltre)
+                    })
+                    
+                }
+            },
+            mounted() {
+                axios
+                    .get('https://pokeapi.co/api/v2/pokemon?limit=999&offset=0')
+                    .then(response => {
+                        
+                        this.infos = response.data.results;
+                        this.bu_infos = this.infos;
+                        
+                    })
+            },
+            methods: {
+                getUrlId: function(u){
+                    let url = u.split('/');
+                    let num = url[url.length - 2]
+                    return num;
+                },
+                afficheDetails: function (i) {
+                    let url = i.split('/');
+                    let num = url[url.length - 2]
+                    //console.log(url[url.length-2])
+
+                    axios
+                    .get('https://pokeapi.co/api/v2/pokemon/'+num)
+                    .then(response => {
+                        
+                        this.info = response.data;
+                        this.mode = 'details';
+                    });
+                    
+                },
+                afficheListe: function () {
+                    this.infos = this.bu_infos;
+                    this.mode = 'catalogue';
+                },
+                getImage: function(id){
+                    let passedId = parseInt(id);
+                    let num = 0;
+                    if(passedId<10){
+                        num = '00'+id;
+                    }
+                    if(passedId>9 && passedId<100){
+                        num = '0'+id;
+                    }
+                    if(passedId > 100){
+                        num = id;
+                    }
+                    return 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'+num+'.png';
+                },
+                displaySearchModale: function(){
+                    this.mode = 'catalogue';
+                    let mod = document.querySelector('.searchModale');
+                    mod.classList.toggle('hidden');
+                },
+                filtreListe: function(){
+                    console.log('change')
+                }
+            }
+
+
+
+        })
+    </script>
+
+
+</body>
+
+</html>

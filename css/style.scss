@@ -1,0 +1,263 @@
+$main-font:'Nunito', sans-serif;
+
+$main-color: #fff;
+$second-color: #000;
+$third-color: #B9322A;
+$fourth-color: #1b2225;
+$fifth-color: #EDF0F1;
+
+body{
+    font-family: $main-font;
+    margin: 0; 
+}
+
+#navbar{
+    width: 100%;
+    background-color: $main-color;
+    position: fixed;
+    box-shadow: #c9cdce 0 3px 6px 0;
+    z-index: 10000;
+    
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 25px auto;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+
+        li{
+            position : relative;
+            
+
+            h1{
+                margin-block: 0;
+                text-align: center;
+                font-size: 30px;
+                font-weight: bold;
+            }
+        }
+    } 
+}
+
+#liste-pokemons{
+    padding-top: 120px;   
+
+    #pokemons{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: end;
+        justify-items: center;
+
+        #pokedex-card{
+
+            margin: 10px;
+
+            #img{
+                background-color: $fifth-color;
+                height: 175px;
+                width: 160px;
+                text-align: center;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                position: relative;
+
+                img{
+                    width:70%;
+                    position: absolute;
+                    
+                    top: 35px;
+                    left: 50%;
+                    margin-left: -55px;
+
+                }
+
+                
+            }
+
+            #info{
+                background-color: $third-color;
+                width: 160px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                padding: 5px 0 5px 0;
+                
+                .bold{
+                    font-weight: bold;
+                }
+                
+                p{
+                    font-size: 12px;
+                    color: $main-color;
+                    margin: 0;
+                    padding-left: 10px;
+                }
+            }
+        }
+
+    }
+}
+
+#container {
+    h2{
+        font-weight: bold;
+        padding-left: 25px;
+    }
+
+    h2::before{
+        content: url(../medias/pokeball.png);
+        margin: 4px;
+        text-align: center;
+    }
+    
+    #liste-pokemons {
+        display: none;
+        &.visible {
+            display: grid;
+        }
+    }
+    #details-pokemons{
+        display: none;
+        &.visible {
+            display: block;
+        }
+    }
+}
+
+
+#details-pokemons{
+    #top{
+        height: 250px;
+        padding-top: 100px;
+        margin-bottom: 190px;
+        background-color: $third-color;
+        position: relative;
+        
+
+        h3{
+            color: $main-color;
+            font-weight: bold;
+            margin-left: 40px;
+        }
+
+        img{
+            position: absolute;
+            top: 200px;
+            left: 15%;
+            
+        }
+
+        
+    }
+
+    #desc{
+        text-align: left;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    #caracteristiques, #statistiques{
+        background-color: $third-color;
+        margin-left: 40px;
+        margin-right: 40px;
+        border-radius: 10px;
+
+        table{
+            margin: 0 auto;
+            padding: 10px;
+
+            thead{
+                color: $main-color;                
+            }
+
+            th,td{
+                text-align: left;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        
+    }
+
+    #types, #faiblesses{
+
+        margin-left: 40px;
+
+        span{
+            font-size: 15px;
+            text-align: center;
+            display: inline-block;
+            width: 55px;
+            color: $main-color;
+            text-transform: uppercase;
+            padding: 2px 5px 2px 5px;
+            margin-right: 8px;
+            border-radius: 3px;
+    
+        }
+    
+        .Plante{
+            background-color: #68B54F;
+        }
+
+        .Poison{
+            background-color: #843E8A;
+        }
+
+        .Feu{
+            background-color: #ED6920;
+        }
+
+        .Psy{
+            background-color: #E03E72;
+        }
+
+        .Vol{
+            background-color: #837BB8;
+        }
+
+        .Glace{
+            background-color: #86C9CA;
+        }
+
+        .Eau{
+            background-color: #4E77BA;
+        }
+
+        .Sol{
+            background-color: #E0B051;
+        }
+
+        .Roche{
+            background-color: #AC8B26;
+        }
+
+        .Electr{
+            background-color: #FDC516;
+        }
+
+    }
+
+    #evolutions{
+        background-color: $fifth-color;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        padding: 25px;
+
+        border-radius: 10px;
+
+        img{
+            margin: 50px auto;
+            display: block;
+            width: 50%;
+            background-color: $main-color;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    }
+    
+}
